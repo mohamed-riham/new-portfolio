@@ -23,10 +23,10 @@ export default function Hero() {
         zIndex: 10,
       }}
     >
-      <div className="hero-grid" style={{ width: "100%", maxWidth: "var(--max-w)", margin: "0 auto" }}>
+      <div style={{ width: "100%", maxWidth: "800px", margin: "0 auto", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
 
-        {/* ── Left ── */}
-        <div>
+        {/* ── Center ── */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
           {/* Label */}
           <motion.span
             initial={{ opacity: 0, x: -20 }}
@@ -61,13 +61,11 @@ export default function Hero() {
             />
             <KineticText
               text="Riham"
+              className="neon-teal"
               delay={0.35}
               style={{
                 display: "block",
-                background: "linear-gradient(135deg, var(--primary), var(--secondary))",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
+                color: "var(--primary)",
               }}
             />
           </h1>
@@ -77,7 +75,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            style={{ fontSize: "1.05rem", marginBottom: "var(--sp-8)", maxWidth: "480px" }}
+            style={{ fontSize: "1.05rem", marginBottom: "var(--sp-8)", maxWidth: "540px", marginInline: "auto" }}
           >
             Software Engineer specializing in privacy-first{" "}
             <strong style={{ color: "var(--primary)" }}>Edge AI</strong> devices,
@@ -91,7 +89,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.05, duration: 0.7 }}
             className="hero-btns"
-            style={{ display: "flex", gap: "var(--sp-4)", flexWrap: "wrap", marginBottom: "var(--sp-12)" }}
+            style={{ display: "flex", gap: "var(--sp-4)", flexWrap: "wrap", justifyContent: "center", marginBottom: "var(--sp-12)" }}
           >
             <a href="#projects" className="btn btn-primary">View Projects ↗</a>
             <a href="#contact" className="btn btn-outline">Let&apos;s Talk</a>
@@ -103,7 +101,7 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.25, duration: 0.8 }}
             className="hero-stats"
-            style={{ display: "flex", gap: "var(--sp-8)", flexWrap: "wrap" }}
+            style={{ display: "flex", gap: "var(--sp-8)", flexWrap: "wrap", justifyContent: "center" }}
           >
             {STATS.map((s, i) => (
               <motion.div
