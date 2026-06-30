@@ -64,6 +64,7 @@
   --space-4: 1rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
+  --space-10: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
 
@@ -197,4 +198,29 @@ a:hover {
 /* Custom interactive active state pointer styling potential */
 .interactive {
   cursor: pointer;
+}
+
+/* 3D card perspective utilities */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Hero responsive grid */
+@media (max-width: 900px) {
+  #home {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+  }
+  #home > div:last-of-type {
+    height: 320px !important;
+  }
+}
+
+/* Floating keyframe for decorative 3D elements */
+@keyframes float3d {
+  0%, 100% { transform: translateY(0) rotateX(0deg); }
+  50% { transform: translateY(-12px) rotateX(3deg); }
+}
+.float-3d {
+  animation: float3d 4s ease-in-out infinite;
 }
