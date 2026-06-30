@@ -5,6 +5,30 @@ import { SectionHeading } from "./MotionUtils";
 
 const ITEMS = [
   {
+    role: "Full-Stack Web Developer",
+    org: "Axis Academy",
+    period: "2022 – 2023",
+    type: "work",
+    color: "var(--accent)",
+    icon: "💻",
+    bullets: [
+      "Developed interactive educational platforms and responsive layouts.",
+      "Optimized frontend performance, resulting in a 30% reduction in load times.",
+    ],
+  },
+  {
+    role: "Freelance Software Engineer",
+    org: "Self-Employed",
+    period: "2021 – Present",
+    type: "work",
+    color: "var(--secondary)",
+    icon: "🌐",
+    bullets: [
+      "Built landing pages, custom dashboards, and automated Python scripts for local clients.",
+      "Ensured strong SEO practices and mobile-first design principles.",
+    ],
+  },
+  {
     role: "BSc (Hons) in Data Science",
     org: "ICBT Campus",
     period: "2025 – Present",

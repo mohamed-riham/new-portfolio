@@ -12,15 +12,19 @@ import Achievements from "@/components/Achievements";
 import Contact      from "@/components/Contact";
 import Footer       from "@/components/Footer";
 
-const CanvasContainer  = dynamic(() => import("@/components/CanvasContainer"),  { ssr: false });
-const FloatingOrbs     = dynamic(() => import("@/components/FloatingOrbs"),     { ssr: false });
-const CursorSpotlight  = dynamic(() => import("@/components/CursorSpotlight"),  { ssr: false });
+const CanvasContainer     = dynamic(() => import("@/components/CanvasContainer"),     { ssr: false });
+const FloatingOrbs        = dynamic(() => import("@/components/FloatingOrbs"),        { ssr: false });
+const CursorSpotlight     = dynamic(() => import("@/components/CursorSpotlight"),     { ssr: false });
+const SpiderWebBackground = dynamic(() => import("@/components/SpiderWebBackground"), { ssr: false });
 
 export default function Home() {
   return (
     <main style={{ minHeight: "100vh", position: "relative", overflowX: "hidden" }}>
       {/* Layer 0 — 3D particle background */}
       <CanvasContainer />
+
+      {/* Spiderman Web Background */}
+      <SpiderWebBackground />
 
       {/* Layer 1 — floating ambient orbs */}
       <FloatingOrbs />

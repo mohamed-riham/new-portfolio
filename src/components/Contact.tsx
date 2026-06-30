@@ -55,13 +55,13 @@ export default function Contact() {
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: "var(--sp-3)" }}>
               <a
-                href="mailto:mohamedriham93@gmail.com"
+                href="mailto:contact@mohamedrihamofficial.com"
                 style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "0.9rem", color: "var(--text-secondary)" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary)")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
               >
                 <span style={{ fontSize: "1.1rem" }}>✉️</span>
-                mohamedriham93@gmail.com
+                contact@mohamedrihamofficial.com
               </a>
               <div style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "0.9rem", color: "var(--text-muted)" }}>
                 <span style={{ fontSize: "1.1rem" }}>📍</span>
