@@ -4,8 +4,6 @@ import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import KineticText from "./KineticText";
 
-const HeroScene = dynamic(() => import("./HeroScene"), { ssr: false });
-
 const STATS = [
   { value: "5+",     label: "Projects Built" },
   { value: "3+",     label: "Years Coding" },
@@ -57,7 +55,7 @@ export default function Hero() {
             }}
           >
             <KineticText
-              text="M.A. Mohamed"
+              text="Mohamed"
               style={{ display: "block" }}
               delay={0.1}
             />
@@ -129,31 +127,6 @@ export default function Hero() {
             ))}
           </motion.div>
         </div>
-
-        {/* ── Right: 3D Canvas ── */}
-        <motion.div
-          className="hero-canvas"
-          initial={{ opacity: 0, scale: 0.88 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.25, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          style={{ position: "relative", borderRadius: "24px", overflow: "hidden" }}
-        >
-          {/* Spinning conic border */}
-          <div style={{
-            position: "absolute", inset: 0, borderRadius: "24px", zIndex: 0,
-            background: "conic-gradient(from var(--hero-border-angle, 0deg), #00e6e6, #9933ff, #1bc961, #00e6e6)",
-            animation: "spin-border 6s linear infinite",
-            padding: "1.5px",
-          }} />
-          <div style={{
-            position: "relative", zIndex: 1, height: "100%",
-            background: "rgba(6,6,10,0.5)", backdropFilter: "blur(4px)",
-            borderRadius: "24px", border: "1px solid rgba(255,255,255,0.04)",
-            margin: "1.5px",
-          }}>
-            <HeroScene />
-          </div>
-        </motion.div>
       </div>
 
       {/* Scroll indicator */}

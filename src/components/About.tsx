@@ -32,7 +32,7 @@ export default function About() {
           <div className="glass" style={{ padding: "var(--sp-8)", marginBottom: "var(--sp-6)" }}>
             <h3 style={{ color: "var(--primary)", marginBottom: "var(--sp-5)" }}>My Story</h3>
             <p style={{ lineHeight: 1.8, marginBottom: "var(--sp-4)" }}>
-              Hi, I&apos;m <strong style={{ color: "var(--text-primary)" }}>M.A. Mohamed Riham</strong> — a Software
+              Hi, I&apos;m <strong style={{ color: "var(--text-primary)" }}>Mohamed Riham</strong> — a Software
               Engineer and Data Science Undergraduate based in{" "}
               <strong style={{ color: "var(--primary)" }}>Addalaichenai, Sri Lanka</strong>.
               I hold an <strong style={{ color: "var(--secondary)" }}>HND in Software Engineering</strong>{" "}
