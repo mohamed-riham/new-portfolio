@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { SectionHeading } from "./MotionUtils";
 
 const ITEMS = [
   {
@@ -56,10 +57,7 @@ const ITEMS = [
 export default function Experience() {
   return (
     <section id="experience" className="section" style={{ zIndex: 10 }}>
-      <div className="section-header">
-        <span className="section-label">// My Journey</span>
-        <h2 className="section-title">Experience & Education</h2>
-      </div>
+      <SectionHeading label="// My Journey" title="Experience & Education" />
 
       {/* Timeline container */}
       <div

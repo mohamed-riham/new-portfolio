@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { SectionHeading } from "./MotionUtils";
 
 const SOCIALS = [
   { name: "GitHub",    url: "https://github.com/mohamed-riham",                  icon: "⚡" },
@@ -24,13 +25,11 @@ export default function Contact() {
 
   return (
     <section id="contact" className="section" style={{ zIndex: 10 }}>
-      <div className="section-header">
-        <span className="section-label">// Say Hello</span>
-        <h2 className="section-title">Get In Touch</h2>
-        <p style={{ marginTop: "var(--sp-5)", maxWidth: "480px" }}>
-          Open to collaborations, job opportunities, and interesting AI conversations.
-        </p>
-      </div>
+      <SectionHeading
+        label="// Say Hello"
+        title="Get In Touch"
+        subtitle="Open to collaborations, job opportunities, and interesting AI conversations."
+      />
 
       <div className="contact-grid">
 

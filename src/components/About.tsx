@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { SectionHeading, RevealCard } from "./MotionUtils";
 
 const TRAITS = [
   { icon: "⚡", title: "Fast Learner",     desc: "Rapidly grasps and ships new technologies and frameworks." },
@@ -18,10 +19,7 @@ export default function About() {
   return (
     <section id="about" className="section" style={{ zIndex: 10, paddingTop: "var(--sp-24)", paddingBottom: "var(--sp-24)" }}>
 
-      <div className="section-header">
-        <span className="section-label">// Who I Am</span>
-        <h2 className="section-title">About Me</h2>
-      </div>
+      <SectionHeading label="// Who I Am" title="About Me" />
 
       <div className="about-grid">
         {/* Left: Story */}

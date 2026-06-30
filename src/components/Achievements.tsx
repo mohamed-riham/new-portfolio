@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { SectionHeading } from "./MotionUtils";
 
 const CERTS = [
   { title: "AWS Academy – Cloud Foundations",       issuer: "Amazon Web Services", date: "2024", icon: "☁️", color: "#f0a500" },
@@ -19,10 +20,7 @@ function hexToRgb(hex: string) {
 export default function Achievements() {
   return (
     <section id="achievements" className="section" style={{ zIndex: 10 }}>
-      <div className="section-header">
-        <span className="section-label">// Recognition</span>
-        <h2 className="section-title">Achievements & Certifications</h2>
-      </div>
+      <SectionHeading label="// Recognition" title="Achievements & Certifications" />
 
       <div
         style={{

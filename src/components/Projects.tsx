@@ -2,6 +2,7 @@
 
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
+import { SectionHeading } from "./MotionUtils";
 
 const PROJECTS = [
   {
@@ -162,14 +163,11 @@ function TiltCard({ proj, idx }: { proj: (typeof PROJECTS)[0]; idx: number }) {
 export default function Projects() {
   return (
     <section id="projects" className="section" style={{ zIndex: 10 }}>
-      <div className="section-header">
-        <span className="section-label">// What I&apos;ve Built</span>
-        <h2 className="section-title">Featured Projects</h2>
-        <p style={{ marginTop: "var(--sp-5)", maxWidth: "520px" }}>
-          Spanning Edge AI hardware, computer vision systems, game engineering, and enterprise dashboards.
-          <span style={{ color: "var(--text-muted)", fontSize: "0.88rem" }}> Hover to interact.</span>
-        </p>
-      </div>
+      <SectionHeading
+        label="// What I've Built"
+        title="Featured Projects"
+        subtitle="Spanning Edge AI hardware, computer vision systems, game engineering, and enterprise dashboards. Hover to interact."
+      />
 
       <div className="projects-grid">
         {PROJECTS.map((proj, idx) => (

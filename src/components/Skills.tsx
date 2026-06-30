@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import { SectionHeading } from "./MotionUtils";
 
 const SkillsGlobe = dynamic(() => import("./SkillsGlobe"), { ssr: false });
 
@@ -53,13 +54,11 @@ const LEGEND = [
 export default function Skills() {
   return (
     <section id="skills" className="section" style={{ zIndex: 10 }}>
-      <div className="section-header">
-        <span className="section-label">// What I Know</span>
-        <h2 className="section-title">Technical Skills</h2>
-        <p style={{ marginTop: "var(--sp-5)", maxWidth: "480px" }}>
-          Rotate the globe to explore — labels orbit in 3D, color-coded by category.
-        </p>
-      </div>
+      <SectionHeading
+        label="// What I Know"
+        title="Technical Skills"
+        subtitle="Rotate the globe to explore — labels orbit in 3D, color-coded by category."
+      />
 
       <div className="skills-grid">
 

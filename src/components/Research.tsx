@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { SectionHeading } from "./MotionUtils";
 
 const STATS = [
   { value: "+10%", label: "Recall Improvement", desc: "XGBoost consistently outperformed Random Forest in detecting fraudulent transactions." },
@@ -11,10 +12,7 @@ const STATS = [
 export default function Research() {
   return (
     <section id="research" className="section" style={{ zIndex: 10 }}>
-      <div className="section-header">
-        <span className="section-label">// Academic Work</span>
-        <h2 className="section-title">Research & Studies</h2>
-      </div>
+      <SectionHeading label="// Academic Work" title="Research & Studies" />
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}

@@ -12,8 +12,9 @@ import Achievements from "@/components/Achievements";
 import Contact      from "@/components/Contact";
 import Footer       from "@/components/Footer";
 
-const CanvasContainer = dynamic(() => import("@/components/CanvasContainer"), { ssr: false });
-const FloatingOrbs    = dynamic(() => import("@/components/FloatingOrbs"),    { ssr: false });
+const CanvasContainer  = dynamic(() => import("@/components/CanvasContainer"),  { ssr: false });
+const FloatingOrbs     = dynamic(() => import("@/components/FloatingOrbs"),     { ssr: false });
+const CursorSpotlight  = dynamic(() => import("@/components/CursorSpotlight"),  { ssr: false });
 
 export default function Home() {
   return (
@@ -27,7 +28,10 @@ export default function Home() {
       {/* Layer 2 — cinematic gradient overlay */}
       <div className="cinematic-bg" />
 
-      {/* Layer 3 — grain texture */}
+      {/* Layer 3 — cursor spotlight */}
+      <CursorSpotlight />
+
+      {/* Layer 4 — grain texture */}
       <div className="grain" />
 
       {/* Navigation */}
