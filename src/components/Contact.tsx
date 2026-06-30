@@ -4,10 +4,11 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 
 const SOCIALS = [
-  { name: "GitHub",   url: "https://github.com/mohamedriham93",      icon: "⚡" },
-  { name: "LinkedIn", url: "https://linkedin.com/in/mohamedriham",   icon: "💼" },
-  { name: "Dev.to",   url: "https://dev.to/mohamedriham",            icon: "📝" },
-  { name: "Medium",   url: "https://medium.com/@mohamedriham",       icon: "✍️" },
+  { name: "GitHub",    url: "https://github.com/mohamed-riham",                  icon: "⚡" },
+  { name: "LinkedIn",  url: "https://linkedin.com/in/mohamed-riham",             icon: "💼" },
+  { name: "Dev.to",    url: "https://dev.to/mohamed-riham",                      icon: "📝" },
+  { name: "Medium",    url: "https://medium.com/@mohamed-riham",                 icon: "✍️" },
+  { name: "Instagram", url: "https://www.instagram.com/_mohamed_riham/",         icon: "📸" },
 ];
 
 export default function Contact() {
@@ -65,7 +66,7 @@ export default function Contact() {
               </a>
               <div style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "0.9rem", color: "var(--text-muted)" }}>
                 <span style={{ fontSize: "1.1rem" }}>📍</span>
-                Colombo, Sri Lanka
+                Addalaichenai, Eastern Province, Sri Lanka
               </div>
             </div>
           </div>

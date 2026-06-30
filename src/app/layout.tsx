@@ -13,30 +13,32 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://riham.dev"),
-  title: "Mohamed Riham | AI & Data Science Portfolio",
-  description: "BSc (Hons) Data Science student and AI/ML developer building practical, user-focused intelligent solutions.",
+  metadataBase: new URL("https://mohamed-riham.github.io/new-portfolio"),
+  title: "M.A. Mohamed Riham | AI Developer & Data Science Undergraduate | Addalaichenai, Sri Lanka",
+  description: "Professional portfolio of M.A. Mohamed Riham — Software Engineer and Data Science Undergraduate from Addalaichenai, Sri Lanka. Specializing in Edge AI, YOLOv8, privacy-first offline systems, and SOLID-pattern software architectures.",
+  keywords: ["Mohamed Riham", "AI Developer", "Data Science", "Edge AI", "YOLOv8", "Sri Lanka", "Addalaichenai", "Machine Learning", "Software Engineer"],
+  authors: [{ name: "M.A. Mohamed Riham" }],
   openGraph: {
-    title: "Mohamed Riham | AI & Data Science Portfolio",
-    description: "BSc (Hons) Data Science student and AI/ML developer building practical, user-focused intelligent solutions.",
-    url: "https://riham.dev",
+    title: "M.A. Mohamed Riham | AI Developer & Data Science Undergraduate",
+    description: "Edge AI hardware, convolutional ML models, and SOLID-pattern software from Addalaichenai, Sri Lanka.",
+    url: "https://mohamed-riham.github.io/new-portfolio",
     siteName: "Mohamed Riham Portfolio",
     images: [
       {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Mohamed Riham Portfolio",
+        url: "https://github.com/mohamed-riham.png",
+        width: 460,
+        height: 460,
+        alt: "M.A. Mohamed Riham",
       },
     ],
     locale: "en_US",
-    type: "website",
+    type: "profile",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mohamed Riham | AI & Data Science Portfolio",
-    description: "BSc (Hons) Data Science student and AI/ML developer building practical, user-focused intelligent solutions.",
-    images: ["/og-image.png"],
+    title: "M.A. Mohamed Riham | AI Developer",
+    description: "Dual-disciplinary Software Engineer & Data Science Undergraduate specializing in offline Edge AI devices.",
+    images: ["https://github.com/mohamed-riham.png"],
   },
 };
 

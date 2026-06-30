@@ -8,7 +8,7 @@ const HeroScene = dynamic(() => import("./HeroScene"), { ssr: false });
 const STATS = [
   { value: "5+",   label: "Projects Built" },
   { value: "3+",   label: "Years Coding" },
-  { value: "AI",   label: "Specialization" },
+  { value: "Edge AI", label: "Specialization" },
 ];
 
 const TYPING_ROLES = ["AI Developer", "Data Scientist", "ML Engineer", "Web Developer"];
@@ -39,7 +39,7 @@ export default function Hero() {
             className="section-label"
             style={{ marginBottom: "var(--sp-4)" }}
           >
-            {"// AI Developer & Data Scientist"}
+            {"// AI Developer & Data Science Undergraduate"}
           </motion.span>
 
           {/* Name */}
@@ -50,7 +50,7 @@ export default function Hero() {
             className="glow-text"
             style={{ marginBottom: "var(--sp-4)", lineHeight: 1.05 }}
           >
-            Mohamed
+            M.A. Mohamed
             <br />
             <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
               Riham
@@ -64,9 +64,10 @@ export default function Hero() {
             transition={{ delay: 0.3, duration: 0.8 }}
             style={{ fontSize: "1.1rem", marginBottom: "var(--sp-8)", maxWidth: "480px" }}
           >
-            I design and build practical AI solutions — specializing in computer vision,
-            ML pipelines, and cloud automation. Driven by{" "}
-            <em style={{ color: "var(--primary)", fontStyle: "italic" }}>learning by doing</em>.
+            Software Engineer and Data Science Undergraduate specializing in privacy-first
+            Edge AI devices, convolutional ML models, and SOLID-pattern software architectures.
+            Based in{" "}
+            <em style={{ color: "var(--primary)", fontStyle: "normal", fontWeight: 600 }}>Addalaichenai, Sri Lanka</em>.
           </motion.p>
 
           {/* CTA Buttons */}

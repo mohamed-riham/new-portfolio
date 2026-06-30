@@ -41,14 +41,14 @@ const ITEMS = [
   },
   {
     role: "HND in Software Engineering",
-    org: "ICBT Campus",
+    org: "BCAS Campus",
     period: "2023 – 2024",
     type: "edu",
     color: "var(--primary)",
     icon: "🎓",
     bullets: [
-      "OOP concepts (Java, C#), clean DB design (SQL), and system architecture.",
-      "Built offline currency detection prototypes as final coursework.",
+      "OOP concepts (Java, C#), clean DB design (SQL), and system architecture with SOLID principles.",
+      "Built offline LKR currency detection prototypes as final coursework deliverables.",
     ],
   },
 ];
