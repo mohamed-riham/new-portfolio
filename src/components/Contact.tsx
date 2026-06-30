@@ -3,240 +3,188 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
+const SOCIALS = [
+  { name: "GitHub",   url: "https://github.com/mohamedriham93",      icon: "⚡" },
+  { name: "LinkedIn", url: "https://linkedin.com/in/mohamedriham",   icon: "💼" },
+  { name: "Dev.to",   url: "https://dev.to/mohamedriham",            icon: "📝" },
+  { name: "Medium",   url: "https://medium.com/@mohamedriham",       icon: "✍️" },
+];
+
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [form, setForm]     = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<"idle"|"sending"|"done"|"error">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) return;
-
+    if (!form.name || !form.email || !form.message) return;
     setStatus("sending");
-    // Mock API call to simulate form submission
-    setTimeout(() => {
-      setStatus("success");
-      setFormData({ name: "", email: "", message: "" });
-    }, 1500);
+    setTimeout(() => { setStatus("done"); setForm({ name: "", email: "", message: "" }); }, 1500);
   };
 
   return (
-    <section
-      id="contact"
-      style={{
-        padding: "var(--space-16) 0",
-        maxWidth: "var(--max-width)",
-        margin: "0 auto",
-        paddingLeft: "var(--space-8)",
-        paddingRight: "var(--space-8)",
-        position: "relative",
-        zIndex: 10
-      }}
-    >
-      {/* Section Header */}
-      <div style={{ marginBottom: "var(--space-12)" }}>
-        <h2 style={{ position: "relative", display: "inline-block" }}>
-          Get In Touch
-          <span
-            style={{
-              position: "absolute",
-              bottom: "-8px",
-              left: 0,
-              width: "40px",
-              height: "3px",
-              background: "var(--primary)",
-              boxShadow: "0 0 10px var(--primary)"
-            }}
-          />
-        </h2>
+    <section id="contact" className="section" style={{ zIndex: 10 }}>
+      <div className="section-header">
+        <span className="section-label">// Say Hello</span>
+        <h2 className="section-title">Get In Touch</h2>
+        <p style={{ marginTop: "var(--sp-5)", maxWidth: "480px" }}>
+          Open to collaborations, job opportunities, and interesting AI conversations.
+        </p>
       </div>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-          gap: "var(--space-8)",
-          alignItems: "start"
-        }}
-      >
-        {/* Contact Info and Social links */}
+      <div className="contact-grid">
+
+        {/* ── Left: Info ── */}
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
+          initial={{ opacity: 0, x: -24 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          style={{ display: "flex", flexDirection: "column", gap: "var(--space-6)" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          style={{ display: "flex", flexDirection: "column", gap: "var(--sp-6)" }}
         >
-          <div>
-            <h3 style={{ fontSize: "1.5rem", marginBottom: "var(--space-3)", color: "var(--primary)" }}>
-              Let's Collaborate!
+          {/* Big intro */}
+          <div className="glass" style={{ padding: "var(--sp-8)" }}>
+            <h3 style={{ fontSize: "clamp(1.3rem, 3vw, 1.7rem)", color: "var(--primary)", marginBottom: "var(--sp-4)", lineHeight: 1.2 }}>
+              Let&apos;s Build Something<br />
+              <span style={{ background: "var(--grad-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                Amazing Together
+              </span>
             </h3>
-            <p style={{ lineHeight: 1.7, marginBottom: "var(--space-4)" }}>
-              Whether you want to discuss a new AI project, collaborate on computer vision solutions, or simply say hi over tea, my inbox is always open.
+            <p style={{ lineHeight: 1.8, marginBottom: "var(--sp-5)" }}>
+              Whether it&apos;s a new AI project, computer vision solution, or you just want to say hi
+              over Sri Lankan tea — my inbox is always open. 🍵
             </p>
-            <div style={{ fontSize: "0.95rem", color: "var(--text-secondary)" }}>
-              📍 Colombo, Sri Lanka
-            </div>
-            <div style={{ fontSize: "0.95rem", color: "var(--text-secondary)", marginTop: "4px" }}>
-              ✉️ <a href="mailto:mohamedriham93@gmail.com">mohamedriham93@gmail.com</a>
+            <div style={{ display: "flex", flexDirection: "column", gap: "var(--sp-3)" }}>
+              <a
+                href="mailto:mohamedriham93@gmail.com"
+                style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "0.9rem", color: "var(--text-secondary)" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary)")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+              >
+                <span style={{ fontSize: "1.1rem" }}>✉️</span>
+                mohamedriham93@gmail.com
+              </a>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "0.9rem", color: "var(--text-muted)" }}>
+                <span style={{ fontSize: "1.1rem" }}>📍</span>
+                Colombo, Sri Lanka
+              </div>
             </div>
           </div>
 
-          {/* Social Icons Grid */}
+          {/* Socials */}
           <div>
-            <h4 style={{ marginBottom: "var(--space-3)", fontSize: "1.05rem" }}>Find Me Online</h4>
-            <div style={{ display: "flex", gap: "var(--space-4)", flexWrap: "wrap" }}>
-              {[
-                { name: "GitHub", url: "https://github.com/mohamedriham93" },
-                { name: "LinkedIn", url: "https://linkedin.com/in/mohamedriham" },
-                { name: "Dev.to", url: "https://dev.to/mohamedriham" },
-                { name: "Medium", url: "https://medium.com/@mohamedriham" }
-              ].map((social) => (
+            <p style={{ fontSize: "0.78rem", fontFamily: "var(--font-mono)", color: "var(--text-muted)", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "var(--sp-4)" }}>
+              Find me online
+            </p>
+            <div style={{ display: "flex", gap: "var(--sp-3)", flexWrap: "wrap" }}>
+              {SOCIALS.map((s) => (
                 <a
-                  key={social.name}
-                  href={social.url}
+                  key={s.name}
+                  href={s.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="interactive glass-panel"
+                  className="glass"
                   style={{
-                    padding: "8px 16px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    padding: "var(--sp-3) var(--sp-4)",
                     fontSize: "0.85rem",
                     fontWeight: 600,
-                    borderColor: "var(--border-color)",
                     color: "var(--text-secondary)",
-                    transition: "color var(--transition-fast), border-color var(--transition-fast)"
+                    transition: "color 0.18s, border-color 0.18s",
+                    borderRadius: "12px",
+                    textDecoration: "none",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "var(--primary)";
                     e.currentTarget.style.color = "var(--primary)";
+                    e.currentTarget.style.borderColor = "rgba(var(--primary-rgb), 0.3)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = "var(--border-color)";
                     e.currentTarget.style.color = "var(--text-secondary)";
+                    e.currentTarget.style.borderColor = "var(--glass-border)";
                   }}
                 >
-                  {social.name}
+                  <span>{s.icon}</span>
+                  {s.name}
                 </a>
               ))}
             </div>
           </div>
         </motion.div>
 
-        {/* Contact Form */}
+        {/* ── Right: Form ── */}
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
+          initial={{ opacity: 0, x: 24 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="glass-panel"
-          style={{ padding: "var(--space-6)" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="glass"
+          style={{ padding: "var(--sp-8)" }}
         >
-          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "var(--space-4)" }}>
-            {/* Name Input */}
+          <h3 style={{ marginBottom: "var(--sp-6)", fontSize: "1.1rem", color: "var(--text-primary)" }}>
+            Send a Message
+          </h3>
+
+          <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: "var(--sp-5)" }}>
+            {/* Name */}
             <div>
-              <label htmlFor="form-name" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, marginBottom: "6px", color: "var(--text-secondary)" }}>
+              <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, marginBottom: "6px", color: "var(--text-muted)", fontFamily: "var(--font-mono)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
                 Your Name
               </label>
               <input
-                id="form-name"
-                type="text"
-                required
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                disabled={status === "sending" || status === "success"}
-                style={{
-                  width: "100%",
-                  padding: "var(--space-3)",
-                  background: "rgba(255,255,255,0.02)",
-                  border: "1px solid var(--border-color)",
-                  borderRadius: "6px",
-                  color: "var(--text-primary)",
-                  outline: "none",
-                  transition: "border-color var(--transition-fast)"
-                }}
-                onFocus={(e) => (e.target.style.borderColor = "var(--primary)")}
-                onBlur={(e) => (e.target.style.borderColor = "var(--border-color)")}
+                type="text" required placeholder="Mohamed Riham"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                disabled={status === "sending" || status === "done"}
+                className="form-input"
               />
             </div>
 
-            {/* Email Input */}
+            {/* Email */}
             <div>
-              <label htmlFor="form-email" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, marginBottom: "6px", color: "var(--text-secondary)" }}>
-                Your Email
+              <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, marginBottom: "6px", color: "var(--text-muted)", fontFamily: "var(--font-mono)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                Email Address
               </label>
               <input
-                id="form-email"
-                type="email"
-                required
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                disabled={status === "sending" || status === "success"}
-                style={{
-                  width: "100%",
-                  padding: "var(--space-3)",
-                  background: "rgba(255,255,255,0.02)",
-                  border: "1px solid var(--border-color)",
-                  borderRadius: "6px",
-                  color: "var(--text-primary)",
-                  outline: "none",
-                  transition: "border-color var(--transition-fast)"
-                }}
-                onFocus={(e) => (e.target.style.borderColor = "var(--primary)")}
-                onBlur={(e) => (e.target.style.borderColor = "var(--border-color)")}
+                type="email" required placeholder="hello@example.com"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                disabled={status === "sending" || status === "done"}
+                className="form-input"
               />
             </div>
 
-            {/* Message Input */}
+            {/* Message */}
             <div>
-              <label htmlFor="form-message" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, marginBottom: "6px", color: "var(--text-secondary)" }}>
+              <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, marginBottom: "6px", color: "var(--text-muted)", fontFamily: "var(--font-mono)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
                 Message
               </label>
               <textarea
-                id="form-message"
-                required
-                rows={5}
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                disabled={status === "sending" || status === "success"}
-                style={{
-                  width: "100%",
-                  padding: "var(--space-3)",
-                  background: "rgba(255,255,255,0.02)",
-                  border: "1px solid var(--border-color)",
-                  borderRadius: "6px",
-                  color: "var(--text-primary)",
-                  outline: "none",
-                  resize: "vertical",
-                  transition: "border-color var(--transition-fast)"
-                }}
-                onFocus={(e) => (e.target.style.borderColor = "var(--primary)")}
-                onBlur={(e) => (e.target.style.borderColor = "var(--border-color)")}
+                required rows={5} placeholder="Tell me about your project..."
+                value={form.message}
+                onChange={(e) => setForm({ ...form, message: e.target.value })}
+                disabled={status === "sending" || status === "done"}
+                className="form-input"
+                style={{ resize: "vertical" }}
               />
             </div>
 
-            {/* Submit Button */}
-            <div>
-              <button
-                type="submit"
-                disabled={status === "sending" || status === "success"}
-                style={{
-                  width: "100%",
-                  padding: "var(--space-3)",
-                  background: status === "success" ? "var(--accent)" : "var(--gradient-cinematic)",
-                  border: "none",
-                  borderRadius: "6px",
-                  color: "var(--bg-base)",
-                  fontWeight: 700,
-                  cursor: "pointer",
-                  fontSize: "0.95rem",
-                  transition: "opacity 0.2s"
-                }}
-              >
-                {status === "sending" && "Transmitting Message..."}
-                {status === "success" && "Message Delivered!"}
-                {status === "idle" && "Send Message"}
-                {status === "error" && "Error Sending!"}
-              </button>
-            </div>
+            {/* Submit */}
+            <button
+              type="submit"
+              disabled={status === "sending" || status === "done"}
+              className="btn btn-primary"
+              style={{
+                width: "100%",
+                background: status === "done" ? "var(--accent)" : undefined,
+                opacity: status === "sending" ? 0.7 : 1,
+              }}
+            >
+              {status === "idle"    && "Send Message →"}
+              {status === "sending" && "Transmitting..."}
+              {status === "done"    && "✓ Message Delivered!"}
+              {status === "error"   && "✗ Error — Try Again"}
+            </button>
           </form>
         </motion.div>
       </div>

@@ -6,208 +6,177 @@ import { useRef } from "react";
 const PROJECTS = [
   {
     title: "Sri Lankan Currency Detector",
-    description:
-      "Assistive technology for visually impaired users. Uses YOLOv8 + ESP32-CAM for offline currency recognition with instant auditory feedback.",
+    description: "Assistive technology for visually impaired users. YOLOv8 + ESP32-CAM for offline currency recognition with instant auditory feedback.",
     stack: ["YOLOv8", "Python", "ESP32-CAM", "Edge AI"],
     type: "AI / Assistive Tech",
     link: "https://github.com/mohamedriham93/offline-currency-detector",
-    size: "large",
+    span: true,
     accent: "#00e6e6",
     icon: "🤖",
   },
   {
     title: "Face Recognition Attendance",
-    description:
-      "Biometric attendance system with 98% accuracy, automated admin notifications, and SQLite-backed record keeping.",
+    description: "Biometric system with 98% accuracy, SQLite records, and automated admin notifications.",
     stack: ["Python", "OpenCV", "SQLite", "Tkinter"],
     type: "Computer Vision",
     link: "https://github.com/mohamedriham93/face-recognition-attendance",
-    size: "medium",
+    span: false,
     accent: "#9933ff",
     icon: "👁️",
   },
   {
-    title: "EDITH – Offline Voice Assistant",
-    description:
-      "Iron Man-inspired offline AI assistant. Runs local scripts, guards privacy, leverages speech recognition engines.",
-    stack: ["Python", "SpeechRecognition", "Pyttsx3", "Automation"],
+    title: "EDITH – Voice Assistant",
+    description: "Iron Man-inspired offline AI assistant. Local scripts, privacy-first, speech recognition engines.",
+    stack: ["Python", "SpeechRecognition", "Pyttsx3"],
     type: "AI Assistant",
     link: "https://github.com/mohamedriham93/EDITH-voice-assistant",
-    size: "medium",
+    span: false,
     accent: "#1bc961",
     icon: "🎙️",
   },
   {
     title: "Azirah – 3D Horror Game",
-    description:
-      "Atmospheric horror game in Unity with real-time lighting, spatial audio, and immersive state-machine driven gameplay.",
-    stack: ["Unity", "C#", "Blender", "Game Dev"],
+    description: "Atmospheric Unity horror game: real-time lighting, spatial audio, state-machine AI.",
+    stack: ["Unity", "C#", "Blender"],
     type: "Game Engineering",
     link: "https://github.com/mohamedriham93/azirah-game",
-    size: "small",
+    span: false,
     accent: "#ff6b9d",
     icon: "👻",
   },
   {
     title: "Axis Academy Website",
-    description:
-      "Full-stack responsive portal with SEO optimization, secure domain configuration, and optimized database queries.",
-    stack: ["PHP", "MySQL", "JavaScript", "HTML/CSS"],
+    description: "Full-stack responsive portal with SEO, secure domain config, and optimised DB queries.",
+    stack: ["PHP", "MySQL", "JavaScript"],
     type: "Web Development",
     link: "https://github.com/mohamedriham93/axis-academy",
-    size: "small",
+    span: false,
     accent: "#f0a500",
     icon: "🌐",
   },
 ];
 
-function TiltCard({
-  proj,
-  idx,
-}: {
-  proj: (typeof PROJECTS)[0];
-  idx: number;
-}) {
+// Hex → r,g,b
+function hexToRgb(hex: string) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `${r},${g},${b}`;
+}
+
+function TiltCard({ proj, idx }: { proj: (typeof PROJECTS)[0]; idx: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [12, -12]), { stiffness: 200, damping: 20 });
-  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-12, 12]), { stiffness: 200, damping: 20 });
-  const glowX = useTransform(x, [-0.5, 0.5], [0, 100]);
-  const glowY = useTransform(y, [-0.5, 0.5], [0, 100]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    x.set((e.clientX - rect.left) / rect.width - 0.5);
-    y.set((e.clientY - rect.top) / rect.height - 0.5);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
+  const mx = useMotionValue(0.5);
+  const my = useMotionValue(0.5);
+  const rotX = useSpring(useTransform(my, [0, 1], [10, -10]), { stiffness: 180, damping: 22 });
+  const rotY = useSpring(useTransform(mx, [0, 1], [-10, 10]), { stiffness: 180, damping: 22 });
+  const gX   = useTransform(mx, [0, 1], [0, 100]);
+  const gY   = useTransform(my, [0, 1], [0, 100]);
+  const rgb  = hexToRgb(proj.accent);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ delay: idx * 0.1, duration: 0.7 }}
-      style={{ perspective: 800 }}
-      className={`bento-card ${proj.size}`}
+      transition={{ delay: idx * 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      className={proj.span ? "proj-span-2" : ""}
+      style={{ perspective: "900px" }}
     >
       <motion.div
         ref={cardRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
         style={{
-          rotateX,
-          rotateY,
+          rotateX: rotX,
+          rotateY: rotY,
           transformStyle: "preserve-3d",
           height: "100%",
-          borderRadius: "12px",
-          background: "var(--glass-bg)",
-          border: `1px solid rgba(${proj.accent.replace("#", "").match(/.{2}/g)?.map((h) => parseInt(h, 16)).join(",") ?? "255,255,255"}, 0.15)`,
-          backdropFilter: "blur(24px)",
-          WebkitBackdropFilter: "blur(24px)",
-          boxShadow: "var(--glass-shadow)",
-          padding: "var(--space-6)",
+          minHeight: proj.span ? "220px" : "260px",
+          borderRadius: "16px",
+          background: "rgba(6,6,10,0.75)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
+          border: `1px solid rgba(${rgb}, 0.18)`,
+          boxShadow: `0 8px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(${rgb}, 0.04)`,
+          padding: "var(--sp-6)",
           display: "flex",
-          flexDirection: "column",
+          flexDirection: proj.span ? "row" : "column",
+          gap: "var(--sp-6)",
           justifyContent: "space-between",
           position: "relative",
           overflow: "hidden",
           cursor: "default",
         }}
+        onMouseMove={(e) => {
+          const rect = e.currentTarget.getBoundingClientRect();
+          mx.set((e.clientX - rect.left) / rect.width);
+          my.set((e.clientY - rect.top) / rect.height);
+        }}
+        onMouseLeave={() => { mx.set(0.5); my.set(0.5); }}
       >
-        {/* Cursor spotlight glow */}
+        {/* Cursor spotlight */}
         <motion.div
           style={{
-            position: "absolute",
-            inset: 0,
-            borderRadius: "12px",
-            background: `radial-gradient(circle at ${glowX}% ${glowY}%, ${proj.accent}18 0%, transparent 60%)`,
-            pointerEvents: "none",
+            position: "absolute", inset: 0, borderRadius: "16px", pointerEvents: "none",
+            background: `radial-gradient(circle at ${gX}% ${gY}%, rgba(${rgb}, 0.12) 0%, transparent 55%)`,
           }}
         />
 
-        {/* Floating icon — lifted in Z with translateZ */}
+        {/* Corner accent line */}
         <div
           style={{
-            transform: "translateZ(30px)",
-            fontSize: "2.5rem",
-            marginBottom: "var(--space-3)",
+            position: "absolute", top: 0, left: 0, right: 0, height: "2px",
+            background: `linear-gradient(90deg, ${proj.accent}, transparent)`,
+            borderRadius: "16px 16px 0 0",
           }}
-        >
-          {proj.icon}
-        </div>
+        />
 
-        <div style={{ transform: "translateZ(20px)" }}>
-          {/* Type tag */}
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.72rem",
-              textTransform: "uppercase",
-              color: proj.accent,
-              letterSpacing: "0.12em",
-              marginBottom: "var(--space-2)",
-            }}
-          >
-            {proj.type}
-          </div>
-
-          {/* Title */}
-          <h3
-            style={{
-              marginBottom: "var(--space-3)",
-              fontSize: "1.25rem",
-              color: "var(--text-primary)",
-            }}
-          >
-            {proj.title}
-          </h3>
-
-          {/* Description */}
-          <p style={{ fontSize: "0.9rem", lineHeight: 1.65, marginBottom: "var(--space-4)" }}>
-            {proj.description}
-          </p>
-        </div>
-
-        <div style={{ transform: "translateZ(15px)" }}>
-          {/* Stack tags */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "var(--space-4)" }}>
-            {proj.stack.map((tag) => (
-              <span
-                key={tag}
+        {/* Left / Top content */}
+        <div style={{ flex: 1, transform: "translateZ(20px)" }}>
+          <div style={{ display: "flex", alignItems: "flex-start", gap: "var(--sp-3)", marginBottom: "var(--sp-4)" }}>
+            <span style={{ fontSize: proj.span ? "2.4rem" : "1.8rem", lineHeight: 1 }}>{proj.icon}</span>
+            <div>
+              <div
                 style={{
-                  background: `${proj.accent}14`,
-                  border: `1px solid ${proj.accent}33`,
-                  padding: "3px 8px",
-                  borderRadius: "4px",
-                  fontSize: "0.72rem",
-                  fontFamily: "var(--font-mono)",
-                  color: proj.accent,
+                  fontFamily: "var(--font-mono)", fontSize: "0.7rem",
+                  textTransform: "uppercase", letterSpacing: "0.15em",
+                  color: proj.accent, marginBottom: "4px",
                 }}
               >
-                {tag}
+                {proj.type}
+              </div>
+              <h3 style={{ fontSize: proj.span ? "1.4rem" : "1.15rem", lineHeight: 1.25 }}>{proj.title}</h3>
+            </div>
+          </div>
+          <p style={{ fontSize: "0.9rem", lineHeight: 1.7, color: "var(--text-secondary)" }}>{proj.description}</p>
+        </div>
+
+        {/* Bottom / Right content */}
+        <div style={{ transform: "translateZ(12px)", display: "flex", flexDirection: "column", justifyContent: "flex-end", gap: "var(--sp-4)", flexShrink: 0 }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+            {proj.stack.map((t) => (
+              <span
+                key={t}
+                style={{
+                  background: `rgba(${rgb}, 0.1)`,
+                  border: `1px solid rgba(${rgb}, 0.25)`,
+                  color: proj.accent,
+                  padding: "3px 10px",
+                  borderRadius: "999px",
+                  fontSize: "0.72rem",
+                  fontFamily: "var(--font-mono)",
+                }}
+              >
+                {t}
               </span>
             ))}
           </div>
-
-          {/* Link */}
           <a
             href={proj.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="interactive"
             style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "6px",
-              fontSize: "0.85rem",
-              fontWeight: 600,
-              color: proj.accent,
+              display: "inline-flex", alignItems: "center", gap: "6px",
+              fontSize: "0.83rem", fontWeight: 700, color: proj.accent,
             }}
           >
             View Repository ↗
@@ -220,62 +189,21 @@ function TiltCard({
 
 export default function Projects() {
   return (
-    <section
-      id="projects"
-      style={{
-        padding: "var(--space-16) 0",
-        maxWidth: "var(--max-width)",
-        margin: "0 auto",
-        paddingLeft: "var(--space-8)",
-        paddingRight: "var(--space-8)",
-        position: "relative",
-        zIndex: 10,
-      }}
-    >
-      {/* Header */}
-      <div style={{ marginBottom: "var(--space-12)" }}>
-        <h2 style={{ position: "relative", display: "inline-block" }}>
-          Featured Projects
-          <span
-            style={{
-              position: "absolute",
-              bottom: "-8px",
-              left: 0,
-              width: "40px",
-              height: "3px",
-              background: "var(--primary)",
-              boxShadow: "0 0 10px var(--primary)",
-            }}
-          />
-        </h2>
-        <p style={{ marginTop: "var(--space-6)", maxWidth: "500px" }}>
-          A selection of work spanning AI, computer vision, game development, and full-stack web. Hover cards to explore.
+    <section id="projects" className="section" style={{ zIndex: 10 }}>
+      <div className="section-header">
+        <span className="section-label">// What I&apos;ve Built</span>
+        <h2 className="section-title">Featured Projects</h2>
+        <p style={{ marginTop: "var(--sp-5)", maxWidth: "520px" }}>
+          A selection spanning AI, computer vision, game development, and full-stack web.
+          <span style={{ color: "var(--text-muted)", fontSize: "0.88rem" }}> Hover to interact.</span>
         </p>
       </div>
 
-      {/* Bento Grid */}
-      <div className="bento-grid">
+      <div className="projects-grid">
         {PROJECTS.map((proj, idx) => (
           <TiltCard key={proj.title} proj={proj} idx={idx} />
         ))}
       </div>
-
-      <style jsx global>{`
-        .bento-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: var(--space-6);
-        }
-        .bento-card.large { grid-column: span 2; }
-        @media (max-width: 1024px) {
-          .bento-grid { grid-template-columns: repeat(2, 1fr); }
-          .bento-card.large { grid-column: span 2; }
-        }
-        @media (max-width: 640px) {
-          .bento-grid { grid-template-columns: 1fr; }
-          .bento-card.large { grid-column: span 1; }
-        }
-      `}</style>
     </section>
   );
 }

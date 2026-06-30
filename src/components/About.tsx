@@ -2,154 +2,165 @@
 
 import { motion } from "framer-motion";
 
+const TRAITS = [
+  { icon: "⚡", title: "Fast Learner",   desc: "Rapidly grasps and ships new technologies." },
+  { icon: "🎯", title: "Problem Solver", desc: "Builds for real accessibility and usability needs." },
+  { icon: "🤝", title: "Team Player",    desc: "Proven leadership as batch representative." },
+  { icon: "☁️", title: "Cloud Minded",   desc: "Passionate about automation and cloud systems." },
+];
+
+const MARQUEE_ITEMS = [
+  "Python", "TensorFlow", "YOLOv8", "OpenCV", "Next.js", "FastAPI",
+  "Docker", "Scikit-Learn", "React", "Unity", "Streamlit", "AWS",
+];
+
 export default function About() {
   return (
-    <section
-      id="about"
-      style={{
-        padding: "var(--space-16) 0",
-        maxWidth: "var(--max-width)",
-        margin: "0 auto",
-        paddingLeft: "var(--space-8)",
-        paddingRight: "var(--space-8)",
-        position: "relative",
-        zIndex: 10
-      }}
-    >
-      {/* Section Header */}
-      <div style={{ marginBottom: "var(--space-12)" }}>
-        <h2 style={{ position: "relative", display: "inline-block" }}>
-          About Me
-          <span
-            style={{
-              position: "absolute",
-              bottom: "-8px",
-              left: 0,
-              width: "40px",
-              height: "3px",
-              background: "var(--primary)",
-              boxShadow: "0 0 10px var(--primary)"
-            }}
-          />
-        </h2>
+    <section id="about" className="section" style={{ zIndex: 10, paddingTop: "var(--sp-24)", paddingBottom: "var(--sp-24)" }}>
+
+      {/* Header */}
+      <div className="section-header">
+        <span className="section-label">// Who I Am</span>
+        <h2 className="section-title">About Me</h2>
       </div>
 
-      {/* Main Grid Content */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-          gap: "var(--space-8)",
-          alignItems: "start"
-        }}
-      >
-        {/* Narrative Card */}
+      {/* Main Grid */}
+      <div className="about-grid">
+
+        {/* Left: Story */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="glass-panel"
-          style={{ padding: "var(--space-8)" }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h3 style={{ marginBottom: "var(--space-4)", color: "var(--primary)" }}>My Story</h3>
-          <p style={{ marginBottom: "var(--space-4)", lineHeight: 1.7 }}>
-            Hi, I'm Mohamed Riham. I am a Sri Lankan developer currently completing my **BSc (Hons) in Data Science** at ICBT Campus. Having previously completed a Higher National Diploma in Software Engineering, I bridge the gap between robust software architecture and cutting-edge artificial intelligence.
-          </p>
-          <p style={{ marginBottom: "var(--space-4)", lineHeight: 1.7 }}>
-            My development philosophy is anchored in **"learning by doing."** Rather than wading through endless documentation, I prefer to dive straight into building, prototyping, and testing solutions.
-          </p>
-          <p style={{ lineHeight: 1.7, color: "var(--text-secondary)" }}>
-            When I'm not writing code, you'll probably find me exploring cloud automation tools, engineering new mechanics in Unity, tinkering with a Raspberry Pi, or sipping hot Sri Lankan tea during late-night refactoring sessions.
-          </p>
+          <div className="glass" style={{ padding: "var(--sp-8)", marginBottom: "var(--sp-6)" }}>
+            <h3 style={{ color: "var(--primary)", marginBottom: "var(--sp-5)" }}>My Story</h3>
+            <p style={{ lineHeight: 1.8, marginBottom: "var(--sp-4)" }}>
+              Hi, I&apos;m <strong style={{ color: "var(--text-primary)" }}>Mohamed Riham</strong> — a Sri Lankan developer
+              completing my <strong style={{ color: "var(--primary)" }}>BSc (Hons) in Data Science</strong> at ICBT Campus.
+              With an HND in Software Engineering, I bridge robust software architecture with cutting-edge AI.
+            </p>
+            <p style={{ lineHeight: 1.8, marginBottom: "var(--sp-4)" }}>
+              My philosophy: <em style={{ color: "var(--accent)" }}>&ldquo;learning by doing.&rdquo;</em> Instead of wading
+              through docs, I build, prototype, and iterate fast.
+            </p>
+            <p style={{ lineHeight: 1.8, color: "var(--text-muted)", fontSize: "0.95rem" }}>
+              Off-screen: exploring cloud automation, engineering Unity mechanics, tinkering with Raspberry Pi —
+              or sipping Sri Lankan tea during late-night refactoring sessions. 🍵
+            </p>
+          </div>
+
+          {/* CV Download card */}
+          <div
+            className="glass"
+            style={{
+              padding: "var(--sp-6)",
+              background: "linear-gradient(135deg, rgba(8,8,20,0.9), rgba(15,8,30,0.85))",
+              borderColor: "rgba(var(--secondary-rgb),0.18)",
+            }}
+          >
+            <h4 style={{ color: "var(--secondary)", marginBottom: "var(--sp-2)", fontSize: "1rem" }}>
+              Professional Credentials
+            </h4>
+            <p style={{ fontSize: "0.9rem", marginBottom: "var(--sp-5)" }}>
+              My academic background, technical competencies, and project deliverables — all in one document.
+            </p>
+            <a href="/resume.pdf" download className="btn btn-outline" style={{ fontSize: "0.85rem" }}>
+              📥 Download CV
+            </a>
+          </div>
         </motion.div>
 
-        {/* Core Attributes & Action Cards */}
+        {/* Right: Trait cards */}
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          style={{ display: "flex", flexDirection: "column", gap: "var(--space-6)" }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          style={{ display: "flex", flexDirection: "column", gap: "var(--sp-4)" }}
         >
-          {/* Attributes Grid */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))",
-              gap: "var(--space-4)"
-            }}
-          >
-            {[
-              { title: "Fast Learner", desc: "Rapidly grasps and implements new technologies and frameworks." },
-              { title: "Problem Solver", desc: "Focuses on building products that address real accessibility needs." },
-              { title: "Team Player", desc: "Proven leadership skills through serving as batch representative." }
-            ].map((attr) => (
-              <div
-                key={attr.title}
-                className="glass-panel"
-                style={{
-                  padding: "var(--space-4)",
-                  textAlign: "center",
-                  borderColor: "rgba(255,255,255,0.03)"
-                }}
-              >
-                <div style={{ color: "var(--accent)", fontSize: "1.1rem", fontWeight: 700, marginBottom: "8px" }}>
-                  {attr.title}
+          {TRAITS.map((t, i) => (
+            <motion.div
+              key={t.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.6 }}
+              className="glass"
+              style={{
+                padding: "var(--sp-5) var(--sp-6)",
+                display: "flex",
+                alignItems: "flex-start",
+                gap: "var(--sp-4)",
+              }}
+            >
+              <span style={{ fontSize: "1.8rem", flexShrink: 0 }}>{t.icon}</span>
+              <div>
+                <div style={{ fontWeight: 700, color: "var(--text-primary)", marginBottom: "4px", fontFamily: "var(--font-display)" }}>
+                  {t.title}
                 </div>
-                <div style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }}>
-                  {attr.desc}
+                <div style={{ fontSize: "0.88rem", color: "var(--text-secondary)", lineHeight: 1.6 }}>
+                  {t.desc}
                 </div>
               </div>
-            ))}
-          </div>
+            </motion.div>
+          ))}
 
-          {/* Action card / Resume */}
-          <div
-            className="glass-panel"
-            style={{
-              padding: "var(--space-6)",
-              display: "flex",
-              flexDirection: "column",
-              gap: "var(--space-4)",
-              background: "linear-gradient(135deg, rgba(8,8,12,0.9) 0%, rgba(15,10,25,0.8) 100%)",
-              borderColor: "rgba(127,0,255,0.15)"
-            }}
-          >
-            <h4 style={{ color: "var(--secondary)" }}>Professional Credentials</h4>
-            <p style={{ fontSize: "0.95rem" }}>
-              Explore my academic background, technical competencies, and project deliverables formatted inside my curriculum vitae.
-            </p>
-            <div>
-              <a
-                href="/resume.pdf"
-                download
-                className="interactive"
+          {/* Location / availability badge */}
+          <div className="glass" style={{ padding: "var(--sp-5) var(--sp-6)" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "var(--sp-3)", marginBottom: "var(--sp-2)" }}>
+              <span
                 style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  padding: "var(--space-2) var(--space-4)",
-                  borderRadius: "20px",
-                  border: "1px solid var(--accent)",
-                  color: "var(--accent)",
-                  fontSize: "0.9rem",
-                  fontWeight: 600,
-                  transition: "background 0.2s, color 0.2s"
+                  width: 10, height: 10, borderRadius: "50%",
+                  background: "var(--accent)",
+                  boxShadow: "0 0 8px var(--accent)",
+                  animation: "pulse-dot 2s infinite",
+                  flexShrink: 0,
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(27,201,97,0.1)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                }}
-              >
-                📥 Download CV (PDF)
-              </a>
+              />
+              <span style={{ fontWeight: 700, color: "var(--accent)", fontSize: "0.88rem", fontFamily: "var(--font-mono)" }}>
+                Available for Opportunities
+              </span>
             </div>
+            <p style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>
+              📍 Colombo, Sri Lanka · Open to remote & on-site roles
+            </p>
           </div>
         </motion.div>
       </div>
+
+      {/* ── Tech Marquee ── */}
+      <div style={{ marginTop: "var(--sp-16)" }}>
+        <p style={{ fontSize: "0.75rem", fontFamily: "var(--font-mono)", color: "var(--text-muted)", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "var(--sp-4)", textAlign: "center" }}>
+          Technologies I work with
+        </p>
+        <div className="marquee-track" style={{ maskImage: "linear-gradient(90deg, transparent, black 10%, black 90%, transparent)" }}>
+          <div className="marquee-inner">
+            {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
+              <span
+                key={i}
+                className="tag"
+                style={{
+                  fontSize: "0.8rem",
+                  padding: "6px 16px",
+                  borderRadius: "999px",
+                  flexShrink: 0,
+                }}
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <style jsx global>{`
+        @keyframes pulse-dot {
+          0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--accent); }
+          50%       { opacity: 0.6; box-shadow: 0 0 16px var(--accent); }
+        }
+      `}</style>
     </section>
   );
 }

@@ -2,168 +2,139 @@
 
 import { motion } from "framer-motion";
 
-const TIMELINE_ITEMS = [
+const ITEMS = [
   {
     role: "BSc (Hons) in Data Science",
-    company: "ICBT Campus",
-    period: "2025 - Present (Ongoing)",
-    type: "education",
+    org: "ICBT Campus",
+    period: "2025 – Present",
+    type: "edu",
+    color: "var(--primary)",
+    icon: "🎓",
     bullets: [
-      "Specializing in Machine Learning modules, predictive analytics, and big data architectures.",
-      "Developing projects to bridge automated software systems with advanced statistical inference."
-    ]
+      "Specializing in ML, predictive analytics, and big-data architectures.",
+      "Bridging automated software systems with advanced statistical inference.",
+    ],
   },
   {
     role: "Web Developer",
-    company: "Axis Academy",
-    period: "Jan - Jul 2025",
-    type: "experience",
+    org: "Axis Academy",
+    period: "Jan – Jul 2025",
+    type: "work",
+    color: "var(--accent)",
+    icon: "💼",
     bullets: [
-      "Built a fully responsive, custom full-stack platform using PHP and MySQL, improving page load speed.",
-      "Optimized query structures, set up domain records, configured secure server hosting, and established initial SEO audit compliance."
-    ]
+      "Built a fully responsive full-stack platform with PHP & MySQL, improving page load speed.",
+      "Configured domain records, secure hosting, and initial SEO audit compliance.",
+    ],
   },
   {
     role: "Batch Representative",
-    company: "IT Society",
-    period: "2024 - 2025",
-    type: "leadership",
+    org: "IT Society",
+    period: "2024 – 2025",
+    type: "lead",
+    color: "var(--secondary)",
+    icon: "🏆",
     bullets: [
-      "Served as a bridge between academic faculty and the student body to address curriculum feedback.",
-      "Supported organization of hackathons, gaming events, and coding meetups, developing soft communication skills."
-    ]
+      "Bridge between faculty and student body, relaying curriculum feedback.",
+      "Organised hackathons, gaming events, and coding meetups.",
+    ],
   },
   {
-    role: "Higher National Diploma (HND) in Software Engineering",
-    company: "ICBT Campus",
-    period: "2023 - 2024",
-    type: "education",
+    role: "HND in Software Engineering",
+    org: "ICBT Campus",
+    period: "2023 – 2024",
+    type: "edu",
+    color: "var(--primary)",
+    icon: "🎓",
     bullets: [
-      "Learned fundamental software engineering, object-oriented concepts (Java, C#), clean database structure (SQL), and system designs.",
-      "Built offline currency detection prototypes as part of final coursework deliverables."
-    ]
-  }
+      "OOP concepts (Java, C#), clean DB design (SQL), and system architecture.",
+      "Built offline currency detection prototypes as final coursework.",
+    ],
+  },
 ];
 
 export default function Experience() {
   return (
-    <section
-      id="experience"
-      style={{
-        padding: "var(--space-16) 0",
-        maxWidth: "800px",
-        margin: "0 auto",
-        paddingLeft: "var(--space-8)",
-        paddingRight: "var(--space-8)",
-        position: "relative",
-        zIndex: 10
-      }}
-    >
-      {/* Section Header */}
-      <div style={{ marginBottom: "var(--space-12)" }}>
-        <h2 style={{ position: "relative", display: "inline-block" }}>
-          Experience & Education
-          <span
-            style={{
-              position: "absolute",
-              bottom: "-8px",
-              left: 0,
-              width: "40px",
-              height: "3px",
-              background: "var(--primary)",
-              boxShadow: "0 0 10px var(--primary)"
-            }}
-          />
-        </h2>
+    <section id="experience" className="section" style={{ zIndex: 10 }}>
+      <div className="section-header">
+        <span className="section-label">// My Journey</span>
+        <h2 className="section-title">Experience & Education</h2>
       </div>
 
-      {/* Timeline Wrapper */}
-      <div style={{ position: "relative", paddingLeft: "30px" }}>
-        {/* Vertical line indicator */}
-        <div
-          style={{
-            position: "absolute",
-            left: "8px",
-            top: "5px",
-            bottom: "5px",
-            width: "2px",
-            background: "linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%)",
-            opacity: 0.5
-          }}
-        />
+      {/* Timeline container */}
+      <div
+        style={{
+          position: "relative",
+          maxWidth: "800px",
+          paddingLeft: "clamp(28px, 5vw, 40px)",
+        }}
+      >
+        {/* Vertical line */}
+        <div className="timeline-line" />
 
-        {TIMELINE_ITEMS.map((item, idx) => (
+        {ITEMS.map((item, i) => (
           <motion.div
-            key={item.role + item.company}
-            initial={{ opacity: 0, x: -20 }}
+            key={item.role}
+            initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ delay: idx * 0.1, duration: 0.6 }}
-            style={{ position: "relative", marginBottom: "var(--space-8)" }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ delay: i * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            style={{ position: "relative", marginBottom: "var(--sp-8)" }}
           >
-            {/* Timeline node dot indicator */}
+            {/* Dot */}
             <div
+              className="timeline-dot"
               style={{
-                position: "absolute",
-                left: "-37px",
-                top: "6px",
-                width: "16px",
-                height: "16px",
-                borderRadius: "50%",
-                background: item.type === "experience" ? "var(--accent)" : "var(--primary)",
-                border: "4px solid var(--bg-base)",
-                boxShadow: item.type === "experience" ? "0 0 8px var(--accent)" : "0 0 8px var(--primary)",
-                zIndex: 2
+                background: item.color,
+                boxShadow: `0 0 10px ${item.color}`,
               }}
             />
 
-            {/* Information Card */}
+            {/* Card */}
             <div
-              className="glass-panel"
+              className="glass"
               style={{
-                padding: "var(--space-6)",
-                borderLeftWidth: "3px",
-                borderLeftColor: item.type === "experience" ? "var(--accent)" : "var(--primary)"
+                padding: "var(--sp-6)",
+                borderLeft: `3px solid ${item.color}`,
+                borderRadius: "0 16px 16px 0",
               }}
             >
-              {/* Header */}
               <div
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "flex-start",
                   flexWrap: "wrap",
-                  gap: "6px",
-                  marginBottom: "var(--space-2)"
+                  gap: "var(--sp-2)",
+                  marginBottom: "var(--sp-3)",
                 }}
               >
-                <div>
-                  <h3 style={{ fontSize: "1.15rem", marginBottom: "2px" }}>{item.role}</h3>
-                  <span style={{ color: "var(--text-secondary)", fontSize: "0.9rem", fontWeight: 600 }}>
-                    {item.company}
-                  </span>
+                <div style={{ display: "flex", alignItems: "center", gap: "var(--sp-3)" }}>
+                  <span style={{ fontSize: "1.4rem" }}>{item.icon}</span>
+                  <div>
+                    <h3 style={{ fontSize: "1.05rem", lineHeight: 1.3, marginBottom: "2px" }}>{item.role}</h3>
+                    <span style={{ color: "var(--text-secondary)", fontSize: "0.88rem", fontWeight: 600 }}>{item.org}</span>
+                  </div>
                 </div>
                 <span
                   style={{
                     fontFamily: "var(--font-mono)",
-                    fontSize: "0.8rem",
-                    background: "rgba(255,255,255,0.03)",
-                    padding: "4px 8px",
-                    borderRadius: "4px",
-                    border: "1px solid var(--border-color)",
-                    color: "var(--text-muted)"
+                    fontSize: "0.75rem",
+                    background: "rgba(255,255,255,0.04)",
+                    border: "1px solid var(--border)",
+                    padding: "3px 10px",
+                    borderRadius: "999px",
+                    color: "var(--text-muted)",
+                    flexShrink: 0,
                   }}
                 >
                   {item.period}
                 </span>
               </div>
 
-              {/* Bullets */}
-              <ul style={{ paddingLeft: "18px", color: "var(--text-secondary)", fontSize: "0.9rem" }}>
-                {item.bullets.map((bullet, bulletIdx) => (
-                  <li key={bulletIdx} style={{ marginBottom: "4px" }}>
-                    {bullet}
-                  </li>
+              <ul style={{ paddingLeft: "18px", color: "var(--text-secondary)", fontSize: "0.88rem", lineHeight: 1.7 }}>
+                {item.bullets.map((b, bi) => (
+                  <li key={bi} style={{ marginBottom: "3px" }}>{b}</li>
                 ))}
               </ul>
             </div>

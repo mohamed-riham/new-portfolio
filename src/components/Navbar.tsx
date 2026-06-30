@@ -4,189 +4,186 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const NAV_LINKS = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Projects", href: "#projects" },
-  { name: "Skills", href: "#skills" },
+  { name: "Home",       href: "#home" },
+  { name: "About",      href: "#about" },
+  { name: "Projects",   href: "#projects" },
+  { name: "Skills",     href: "#skills" },
   { name: "Experience", href: "#experience" },
-  { name: "Research", href: "#research" },
-  { name: "Contact", href: "#contact" }
+  { name: "Contact",    href: "#contact" },
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled]       = useState(false);
+  const [open, setOpen]               = useState(false);
+  const [active, setActive]           = useState("home");
 
-  // Monitor scroll for glass background activation
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Close menu on resize to desktop
+  useEffect(() => {
+    const onResize = () => { if (window.innerWidth > 768) setOpen(false); };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   return (
-    <header
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: 100 + "%",
-        height: "var(--header-height)",
-        zIndex: 100,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "0 var(--space-8)",
-        transition: "background var(--transition-normal), border-color var(--transition-normal)",
-        background: scrolled ? "var(--glass-bg)" : "transparent",
-        backdropFilter: scrolled ? "blur(var(--glass-blur))" : "none",
-        borderBottom: scrolled ? "1px solid var(--glass-border)" : "1px solid transparent"
-      }}
-    >
-      {/* Brand Monogram */}
-      <a
-        href="#home"
+    <>
+      <header
         style={{
-          fontFamily: "var(--font-display)",
-          fontSize: "1.5rem",
-          fontWeight: 800,
-          color: scrolled ? "var(--primary)" : "var(--text-primary)",
-          letterSpacing: "0.1em",
-          transition: "color var(--transition-fast)"
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "var(--nav-h)",
+          zIndex: 200,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "0 var(--section-px)",
+          transition: "background 0.4s, border-color 0.4s, backdrop-filter 0.4s",
+          background: scrolled ? "rgba(6,6,10,0.85)" : "transparent",
+          backdropFilter: scrolled ? "blur(20px)" : "none",
+          WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
+          borderBottom: `1px solid ${scrolled ? "rgba(255,255,255,0.06)" : "transparent"}`,
         }}
       >
-        MR
-      </a>
+        {/* Brand */}
+        <a
+          href="#home"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "1.4rem",
+            fontWeight: 800,
+            letterSpacing: "0.08em",
+            background: "var(--grad-primary)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
+        >
+          MR
+        </a>
 
-      {/* Desktop Navigation */}
-      <nav style={{ display: "flex", gap: "var(--space-6)" }} className="desktop-only">
-        {NAV_LINKS.map((link) => (
+        {/* Desktop Nav */}
+        <nav className="nav-links">
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              style={{
+                fontFamily: "var(--font-body)",
+                fontSize: "0.88rem",
+                fontWeight: 500,
+                color: "var(--text-secondary)",
+                transition: "color 0.18s",
+                position: "relative",
+                padding: "4px 0",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-primary)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+            >
+              {link.name}
+            </a>
+          ))}
           <a
-            key={link.name}
-            href={link.href}
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "0.9rem",
-              fontWeight: 500,
-              color: "var(--text-secondary)",
-              transition: "color var(--transition-fast)",
-              position: "relative"
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = "var(--primary)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = "var(--text-secondary)";
-            }}
+            href="#contact"
+            className="btn btn-primary"
+            style={{ padding: "0.45rem 1.2rem", fontSize: "0.82rem" }}
           >
-            {link.name}
+            Hire Me
           </a>
-        ))}
-      </nav>
+        </nav>
 
-      {/* Mobile Toggle Button */}
-      <button
-        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        style={{
-          background: "none",
-          border: "none",
-          cursor: "pointer",
-          color: "var(--text-primary)",
-          display: "none", // Will be toggled via media query styled classes in globals.css or inline rules
-          flexDirection: "column",
-          gap: "6px",
-          zIndex: 101
-        }}
-        className="mobile-toggle"
-      >
-        <span
-          style={{
-            width: "24px",
-            height: "2px",
-            background: "var(--text-primary)",
-            transform: mobileMenuOpen ? "rotate(45deg) translate(5px, 6px)" : "none",
-            transition: "transform 0.3s"
-          }}
-        />
-        <span
-          style={{
-            width: "24px",
-            height: "2px",
-            background: "var(--text-primary)",
-            opacity: mobileMenuOpen ? 0 : 1,
-            transition: "opacity 0.3s"
-          }}
-        />
-        <span
-          style={{
-            width: "24px",
-            height: "2px",
-            background: "var(--text-primary)",
-            transform: mobileMenuOpen ? "rotate(-45deg) translate(5px, -6px)" : "none",
-            transition: "transform 0.3s"
-          }}
-        />
-      </button>
+        {/* Mobile Hamburger */}
+        <button
+          className="nav-toggle"
+          onClick={() => setOpen(!open)}
+          aria-label="Toggle menu"
+        >
+          {[0, 1, 2].map((i) => (
+            <span
+              key={i}
+              style={{
+                display: "block",
+                width: "22px",
+                height: "2px",
+                background: "var(--text-primary)",
+                borderRadius: "2px",
+                transition: "transform 0.3s, opacity 0.3s",
+                transform:
+                  open
+                    ? i === 0 ? "rotate(45deg) translate(5px, 5px)"
+                    : i === 2 ? "rotate(-45deg) translate(5px, -5px)"
+                    : "none"
+                    : "none",
+                opacity: open && i === 1 ? 0 : 1,
+              }}
+            />
+          ))}
+        </button>
+      </header>
 
-      {/* CSS overrides directly injected for desktop vs mobile nav styles */}
-      <style jsx global>{`
-        @media (max-width: 768px) {
-          .desktop-only {
-            display: none !important;
-          }
-          .mobile-toggle {
-            display: flex !important;
-          }
-        }
-      `}</style>
-
-      {/* Mobile Menu Panel */}
+      {/* Mobile Slide-down Menu */}
       <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
+        {open && (
+          <motion.nav
+            initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             style={{
               position: "fixed",
-              top: "var(--header-height)",
+              top: "var(--nav-h)",
               left: 0,
-              width: "100%",
-              background: "var(--bg-surface)",
-              borderBottom: "1px solid var(--border-color)",
-              padding: "var(--space-6) var(--space-8)",
+              right: 0,
+              zIndex: 199,
+              background: "rgba(6,6,10,0.96)",
+              backdropFilter: "blur(24px)",
+              WebkitBackdropFilter: "blur(24px)",
+              borderBottom: "1px solid var(--border)",
+              padding: "var(--sp-6) var(--section-px) var(--sp-8)",
               display: "flex",
               flexDirection: "column",
-              gap: "var(--space-4)",
-              zIndex: 99
+              gap: "var(--sp-2)",
             }}
           >
-            {NAV_LINKS.map((link) => (
-              <a
+            {NAV_LINKS.map((link, i) => (
+              <motion.a
                 key={link.name}
                 href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
+                initial={{ opacity: 0, x: -16 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.05 }}
+                onClick={() => setOpen(false)}
                 style={{
                   fontFamily: "var(--font-display)",
-                  fontSize: "1.1rem",
+                  fontSize: "1.15rem",
                   fontWeight: 600,
                   color: "var(--text-secondary)",
-                  padding: "var(--space-2) 0"
+                  padding: "var(--sp-3) 0",
+                  borderBottom: "1px solid var(--border)",
                 }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary)")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
               >
                 {link.name}
-              </a>
+              </motion.a>
             ))}
-          </motion.div>
+            <a
+              href="#contact"
+              className="btn btn-primary"
+              onClick={() => setOpen(false)}
+              style={{ marginTop: "var(--sp-4)", alignSelf: "flex-start" }}
+            >
+              Hire Me
+            </a>
+          </motion.nav>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }
